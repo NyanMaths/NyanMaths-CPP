@@ -16,8 +16,8 @@ nm::Cone::Cone () :
 }
 
 nm::Cone::Cone (const double radius, const double height, const nm::MeasurementUnit unit) :
-    _radius(convert(radius, unit, metre)),
-    _height(convert(height, unit, metre))
+    _radius(nm::convert(radius, unit, metre)),
+    _height(nm::convert(height, unit, metre))
 {
     if (radius < 0.0 || height < 0.0)
         throw std::invalid_argument("Exception in nm::Cone::Cone : invalid measurements");
@@ -36,11 +36,11 @@ std::string nm::Cone::whatIsThis () const
 
 double nm::Cone::radius (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius, metre, unit);
+    return nm::convert(_radius, metre, unit);
 }
 double nm::Cone::diameter (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius * 2.0, metre, unit);
+    return nm::convert(_radius * 2.0, metre, unit);
 }
 nm::Disk nm::Cone::base () const
 {
@@ -49,25 +49,25 @@ nm::Disk nm::Cone::base () const
 
 double nm::Cone::height (const nm::MeasurementUnit unit) const
 {
-    return convert(_height, metre, unit);
+    return nm::convert(_height, metre, unit);
 }
 double nm::Cone::slantHeight (const nm::MeasurementUnit unit) const
 {
-    return convert(sqrt(nm::square(_radius) + nm::square(_height)), metre, unit);
+    return nm::convert(sqrt(nm::square(_radius) + nm::square(_height)), metre, unit);
 }
 
 double nm::Cone::lateralSurface (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::consts::pi * _radius * slantHeight(), metre, unit, 2u);
+    return nm::convert(nm::consts::pi * _radius * slantHeight(), metre, unit, 2u);
 }
 double nm::Cone::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::consts::pi * nm::square(_radius) + lateralSurface(), metre, unit, 2u);
+    return nm::convert(nm::consts::pi * nm::square(_radius) + lateralSurface(), metre, unit, 2u);
 }
 
 double nm::Cone::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::consts::pi * nm::square(_radius) * _height / 3.0, metre, unit, 3u);
+    return nm::convert(nm::consts::pi * nm::square(_radius) * _height / 3.0, metre, unit, 3u);
 }
 
 
@@ -76,7 +76,7 @@ nm::Error nm::Cone::setRadius (const double newRadius, const nm::MeasurementUnit
     if (newRadius < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _radius = convert(newRadius, unit, metre);
+    _radius = nm::convert(newRadius, unit, metre);
     return nm::Error::NoError;
 }
 void nm::Cone::setBase (const nm::Disk& newBase)
@@ -89,7 +89,7 @@ nm::Error nm::Cone::setHeight (const double newHeight, const nm::MeasurementUnit
     if (newHeight < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _height = convert(newHeight, unit, metre);
+    _height = nm::convert(newHeight, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Cone::setSlantHeight (const double newSlantHeight, const nm::MeasurementUnit unit)

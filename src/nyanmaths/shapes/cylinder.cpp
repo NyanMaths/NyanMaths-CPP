@@ -17,8 +17,8 @@ nm::Cylinder::Cylinder () :
 }
 
 nm::Cylinder::Cylinder (const double radius, const double height, const nm::MeasurementUnit unit) :
-    _radius(convert(radius, unit, metre)),
-    _height(convert(height, unit, metre))
+    _radius(nm::convert(radius, unit, metre)),
+    _height(nm::convert(height, unit, metre))
 {
     if (radius < 0.0 || height < 0.0)
         throw std::invalid_argument("Exception in nm::Cylinder::Cylinder : invalid measurements");
@@ -37,7 +37,7 @@ std::string nm::Cylinder::whatIsThis () const
 
 double nm::Cylinder::radius (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius, metre, unit);
+    return nm::convert(_radius, metre, unit);
 }
 nm::Disk nm::Cylinder::base () const
 {
@@ -46,21 +46,21 @@ nm::Disk nm::Cylinder::base () const
 
 double nm::Cylinder::height (const nm::MeasurementUnit unit) const
 {
-    return convert(_height, metre, unit);
+    return nm::convert(_height, metre, unit);
 }
 
 double nm::Cylinder::lateralSurface (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius * nm::consts::tau * _height, metre, unit, 2u);
+    return nm::convert(_radius * nm::consts::tau * _height, metre, unit, 2u);
 }
 double nm::Cylinder::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius * nm::consts::tau * _height + nm::square(_radius) * nm::consts::tau, metre, unit, 2u);
+    return nm::convert(_radius * nm::consts::tau * _height + nm::square(_radius) * nm::consts::tau, metre, unit, 2u);
 }
 
 double nm::Cylinder::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::square(_radius) * nm::consts::pi * _height, metre, unit, 3u);
+    return nm::convert(nm::square(_radius) * nm::consts::pi * _height, metre, unit, 3u);
 }
 
 
@@ -69,7 +69,7 @@ nm::Error nm::Cylinder::setRadius (const double newRadius, const nm::Measurement
     if (newRadius < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _radius = convert(newRadius, unit, metre);
+    _radius = nm::convert(newRadius, unit, metre);
     return nm::Error::NoError;
 }
 void nm::Cylinder::setBase (const nm::Disk& newBase)
@@ -82,7 +82,7 @@ nm::Error nm::Cylinder::setHeight (const double newHeight, const nm::Measurement
     if (newHeight < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _height = convert(newHeight, unit, metre);
+    _height = nm::convert(newHeight, unit, metre);
     return nm::Error::NoError;
 }
 

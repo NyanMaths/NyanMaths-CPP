@@ -1,10 +1,14 @@
-CONFIG -= qt
-CONFIG += c++20
+TARGET = nyanmaths
+# Classic versioning : major.minor.patch
+VERSION = 0.1.0
+
 
 TEMPLATE = lib
 
-INCLUDEPATH += include
+CONFIG -= qt
+CONFIG += c++20
 
+INCLUDEPATH += include
 
 SOURCES += \
     $$files(src/nyanmaths/*.cpp) \
@@ -15,11 +19,3 @@ HEADERS += \
     $$files(include/nyanmaths/*.hpp) \
     $$files(include/nyanmaths/shapes/*.hpp) \
     $$files(include/nyanmaths/functions/*.hpp) \
-
-
-# Default rules for deployment.
-unix
-{
-    target.path = /usr/lib
-}
-!isEmpty(target.path): INSTALLS += target

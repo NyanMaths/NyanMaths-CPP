@@ -39,17 +39,17 @@ std::string nm::Cube::whatIsThis () const
 
 double nm::Cube::edge (const nm::MeasurementUnit unit) const
 {
-    return convert(_length, metre, unit);
+    return nm::convert(_length, metre, unit);
 }
 
 double nm::Cube::diagonal (const nm::MeasurementUnit unit) const
 {
-    return convert(_length * sqrt(3.0), metre, unit);
+    return nm::convert(_length * sqrt(3.0), metre, unit);
 }
 
 double nm::Cube::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::square(_length) * 6.0, metre, unit, 2u);
+    return nm::convert(nm::square(_length) * 6.0, metre, unit, 2u);
 }
 
 nm::Ball nm::Cube::insphere () const
@@ -68,7 +68,7 @@ nm::Error nm::Cube::setLength (const double newLength, const nm::MeasurementUnit
     if (newLength < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newLength, unit, metre);
+    _length = nm::convert(newLength, unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -78,7 +78,7 @@ nm::Error nm::Cube::setWidth (const double newWidth, const nm::MeasurementUnit u
     if (newWidth < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newWidth, unit, metre);
+    _length = nm::convert(newWidth, unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -88,7 +88,7 @@ nm::Error nm::Cube::setHeight (const double newHeight, const nm::MeasurementUnit
     if (newHeight < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newHeight, unit, metre);
+    _length = nm::convert(newHeight, unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -98,7 +98,7 @@ nm::Error nm::Cube::setEdge (const double newEdge, const nm::MeasurementUnit uni
     if (newEdge < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newEdge, unit, metre);
+    _length = nm::convert(newEdge, unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -109,7 +109,7 @@ nm::Error nm::Cube::setDiagonal (const double newDiagonal, const nm::Measurement
     if (newDiagonal < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newDiagonal / sqrt(3.0), unit, metre);
+    _length = nm::convert(newDiagonal / sqrt(3.0), unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -120,7 +120,7 @@ nm::Error nm::Cube::setSurface (const double newSurface, const nm::MeasurementUn
     if (newSurface < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(sqrt(newSurface / 6.0), unit, metre);
+    _length = nm::convert(sqrt(newSurface / 6.0), unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;
@@ -131,7 +131,7 @@ nm::Error nm::Cube::setVolume (const double newVolume, const nm::MeasurementUnit
     if (newVolume < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(pow(newVolume, 1.0 / 3.0), unit, metre);
+    _length = nm::convert(pow(newVolume, 1.0 / 3.0), unit, metre);
     _width = _length;
     _height = _length;
     return nm::Error::NoError;

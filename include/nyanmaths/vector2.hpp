@@ -4,28 +4,29 @@
 #include <iostream>
 
 #include <nyanmaths/core.hpp>
+#include <nyanmaths/vector.hpp>
 
 
 namespace nm
 {
-    class Vector2
+    class Vector2 : public nm::Vector
     {
         public:
             explicit Vector2();
             explicit Vector2(double x, double y);
 
-            virtual ~Vector2();
+            virtual ~Vector2() override;
 
 
             double x() const;
             double y() const;
-            double length() const;
+            virtual double length() const override;
 
             void setX(double newX);
             void setY(double newY);
-            nm::Error setLength(double newLength);
+            virtual nm::Error setLength(double newLength) override;
 
-            bool isNull() const;
+            virtual bool isNull() const override;
             bool isCollinear(const nm::Vector2& mayBeCollinear) const;
 
 

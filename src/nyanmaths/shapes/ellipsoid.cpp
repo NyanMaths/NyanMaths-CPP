@@ -14,16 +14,16 @@ nm::Ellipsoid::Ellipsoid () : _a(defaultMeasurement()), _b(defaultMeasurement())
 }
 
 nm::Ellipsoid::Ellipsoid (const double a, const double b, const double c, const nm::MeasurementUnit unit) :
-    _a(convert(a, unit, metre)),
-    _b(convert(b, unit, metre)),
-    _c(convert(c, unit, metre))
+    _a(nm::convert(a, unit, metre)),
+    _b(nm::convert(b, unit, metre)),
+    _c(nm::convert(c, unit, metre))
 {
     if (a < 0.0 || b < 0.0 || c < 0.0)
         throw std::invalid_argument("Exception in nm::Ellipsoid::Ellipsoid : invalid measurements");
 }
 
 nm::Ellipsoid::Ellipsoid (const double radius, const nm::MeasurementUnit unit) :
-    _a(convert(radius, unit, metre)),
+    _a(nm::convert(radius, unit, metre)),
     _b(_a),
     _c(_a)
 {
@@ -55,15 +55,15 @@ std::string nm::Ellipsoid::whatIsThis () const
 
 double nm::Ellipsoid::a (const nm::MeasurementUnit unit) const
 {
-    return convert(_a, metre, unit);
+    return nm::convert(_a, metre, unit);
 }
 double nm::Ellipsoid::b (const nm::MeasurementUnit unit) const
 {
-    return convert(_b, metre, unit);
+    return nm::convert(_b, metre, unit);
 }
 double nm::Ellipsoid::c (const nm::MeasurementUnit unit) const
 {
-    return convert(_c, metre, unit);
+    return nm::convert(_c, metre, unit);
 }
 
 double nm::Ellipsoid::surface (const nm::MeasurementUnit unit) const
@@ -71,12 +71,12 @@ double nm::Ellipsoid::surface (const nm::MeasurementUnit unit) const
     if (_a != _b && _a != _c)
         throw std::logic_error("Exception in nm::Ellipsoid::surface : unable to compute if object is not ball-like");
 
-    return convert(_a * _a * nm::consts::tau * 2.0, metre, unit, 2u);
+    return nm::convert(_a * _a * nm::consts::tau * 2.0, metre, unit, 2u);
 }
 
 double nm::Ellipsoid::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(_a * _b * _c * nm::consts::tau * 2.0 / 3.0, metre, unit, 3u);
+    return nm::convert(_a * _b * _c * nm::consts::tau * 2.0 / 3.0, metre, unit, 3u);
 }
 
 
@@ -85,7 +85,7 @@ nm::Error nm::Ellipsoid::setA (const double newA, const nm::MeasurementUnit unit
     if (newA < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _a = convert(newA, unit, metre);
+    _a = nm::convert(newA, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Ellipsoid::setB (const double newB, const nm::MeasurementUnit unit)
@@ -93,7 +93,7 @@ nm::Error nm::Ellipsoid::setB (const double newB, const nm::MeasurementUnit unit
     if (newB < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _b = convert(newB, unit, metre);
+    _b = nm::convert(newB, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Ellipsoid::setC (const double newC, const nm::MeasurementUnit unit)
@@ -101,7 +101,7 @@ nm::Error nm::Ellipsoid::setC (const double newC, const nm::MeasurementUnit unit
     if (newC < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _c = convert(newC, unit, metre);
+    _c = nm::convert(newC, unit, metre);
     return nm::Error::NoError;
 }
 

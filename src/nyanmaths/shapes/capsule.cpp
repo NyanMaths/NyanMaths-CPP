@@ -15,8 +15,8 @@ nm::Capsule::Capsule () : _radius(defaultMeasurement(metre)), _length(defaultMea
 }
 
 nm::Capsule::Capsule (const double radius, const double length, const nm::MeasurementUnit unit) :
-    _radius(convert(radius, unit, metre)),
-    _length(convert(length, unit, metre))
+    _radius(nm::convert(radius, unit, metre)),
+    _length(nm::convert(length, unit, metre))
 {
     if (radius < 0.0)
         throw std::invalid_argument("Exception in nm::Capsule::Capsule : invalid radius");
@@ -55,16 +55,16 @@ std::string nm::Capsule::whatIsThis () const
 
 double nm::Capsule::radius (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius, metre, unit);
+    return nm::convert(_radius, metre, unit);
 }
 double nm::Capsule::diameter (const nm::MeasurementUnit unit) const
 {
-    return convert(_radius * 2.0, metre, unit);
+    return nm::convert(_radius * 2.0, metre, unit);
 }
 
 double nm::Capsule::length (const nm::MeasurementUnit unit) const
 {
-    return convert(_length, metre, unit);
+    return nm::convert(_length, metre, unit);
 }
 
 nm::Cylinder nm::Capsule::trunk () const
@@ -74,20 +74,20 @@ nm::Cylinder nm::Capsule::trunk () const
 
 double nm::Capsule::tipSurface (const nm::MeasurementUnit unit) const
 {
-    return convert(consts::tau * nm::square(_radius), metre, unit, 2u);
+    return nm::convert(consts::tau * nm::square(_radius), metre, unit, 2u);
 }
 double nm::Capsule::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(tipSurface(metre) * 2.0 + trunk().lateralSurface(metre), metre, unit, 2u);
+    return nm::convert(tipSurface(metre) * 2.0 + trunk().lateralSurface(metre), metre, unit, 2u);
 }
 
 double nm::Capsule::tipVolume (const nm::MeasurementUnit unit) const
 {
-    return convert(consts::tau * nm::cube(_radius) / 3.0, metre, unit, 3u);
+    return nm::convert(consts::tau * nm::cube(_radius) / 3.0, metre, unit, 3u);
 }
 double nm::Capsule::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(tipVolume(metre) * 2.0 + trunk().volume(metre), metre, unit);
+    return nm::convert(tipVolume(metre) * 2.0 + trunk().volume(metre), metre, unit);
 }
 
 
@@ -96,7 +96,7 @@ nm::Error nm::Capsule::setRadius (const double newRadius, const nm::MeasurementU
     if (newRadius < 0.0 || newRadius * 2.0 < _length)
         return nm::Error::InvalidMeasurement;
 
-    _radius = convert(newRadius, unit, metre);
+    _radius = nm::convert(newRadius, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Capsule::setDiameter (double newDiameter, const nm::MeasurementUnit unit)
@@ -104,7 +104,7 @@ nm::Error nm::Capsule::setDiameter (double newDiameter, const nm::MeasurementUni
     if (newDiameter < 0.0 || newDiameter < _length)
         return nm::Error::InvalidMeasurement;
 
-    _radius = convert(newDiameter * 0.5, unit, metre);
+    _radius = nm::convert(newDiameter * 0.5, unit, metre);
     return nm::Error::NoError;
 }
 
@@ -113,7 +113,7 @@ nm::Error nm::Capsule::setLength (const double newLength, const nm::MeasurementU
     if (newLength < _radius * 2.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newLength, unit, metre);
+    _length = nm::convert(newLength, unit, metre);
     return nm::Error::NoError;
 }
 

@@ -18,68 +18,11 @@ unless for really specific needs, Shape should do the job rightly.
 #include <cinttypes>
 
 #include <nyanmaths/core.hpp>
+#include <nyanmaths/unit.hpp>
 
 
 namespace nm
 {
-    class MeasurementUnit
-    {
-        public:
-            enum Name : uint8_t
-            {
-                Metre,
-                Inch,
-                Foot,
-                Yard,
-                Mile,
-                NauticalMile,
-                League,
-                PlanckLength,
-                Angstrom,
-                UA,
-                LY,
-                Parsec
-            };
-            enum Multiplier : int8_t
-            {
-                Yocto = -24,
-                Zepto = -21,
-                Atto = -18,
-                Femto = -15,
-                Pico = -12,
-                Nano = -9,
-                Micro = -6,
-                Milli = -3,
-                Centi = -2,
-                Deci = -1,
-                NoMultiplier = 0,
-                Deca = 1,
-                Hecto = 2,
-                Kilo = 3,
-                Mega = 6,
-                Giga = 9,
-                Tera = 12,
-                Peta = 15,
-                Exa = 18,
-                Zetta = 21,
-                Yotta = 24
-            };
-            static const std::map<MeasurementUnit::Name, long double> value;
-
-
-            // Constructor
-            explicit MeasurementUnit();
-            explicit MeasurementUnit(MeasurementUnit::Name, MeasurementUnit::Multiplier multiplier = NoMultiplier);
-
-            virtual ~MeasurementUnit();
-
-
-            // Data members ; no encapsulation needed
-            MeasurementUnit::Name name;
-            MeasurementUnit::Multiplier multiplier;
-    };
-
-
     class Shape
     {
         public:
@@ -92,8 +35,8 @@ namespace nm
             virtual nm::Shape& operator/=(double) = 0;
 
 
-            static double defaultMeasurement(MeasurementUnit unit = defaultMeasurementUnit());
-            static nm::Error setDefaultMeasurement(double, MeasurementUnit unit = defaultMeasurementUnit());
+            static double defaultMeasurement(nm::MeasurementUnit unit = defaultMeasurementUnit());
+            static nm::Error setDefaultMeasurement(double, nm::MeasurementUnit unit = defaultMeasurementUnit());
 
             static nm::MeasurementUnit defaultMeasurementUnit();
             static void setDefaultMeasurementUnit(nm::MeasurementUnit);
@@ -105,12 +48,10 @@ namespace nm
 
 
         protected:
-            static double convert(double, nm::MeasurementUnit, nm::MeasurementUnit, uint64_t dimension = 1);
-
             // Often used in shapes, use it insthead of instanciating it once again ;-)
             static const nm::MeasurementUnit metre;
-    };
-}
+    };  /// Class Shape
+}  /// Namespace nm
 
 
 #endif  // SHAPE_HPP

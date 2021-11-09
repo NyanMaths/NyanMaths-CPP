@@ -19,8 +19,8 @@ nm::Cuboid::Cuboid () :
 }
 
 nm::Cuboid::Cuboid (const double length, const double width, const double height, const nm::MeasurementUnit unit) :
-    _length(convert(length, unit, metre)),
-    _width(convert(width, unit, metre)),
+    _length(nm::convert(length, unit, metre)),
+    _width(nm::convert(width, unit, metre)),
     _height(_length)
 {
     if (length < 0.0 || width < 0.0 || height < 0.0)
@@ -28,7 +28,7 @@ nm::Cuboid::Cuboid (const double length, const double width, const double height
 }
 
 nm::Cuboid::Cuboid (const double edge, const nm::MeasurementUnit unit) :
-    _length(convert(edge, unit, metre)),
+    _length(nm::convert(edge, unit, metre)),
     _width(_length),
     _height(_length)
 {
@@ -60,30 +60,30 @@ std::string nm::Cuboid::whatIsThis () const
 
 double nm::Cuboid::length (const nm::MeasurementUnit unit) const
 {
-    return convert(_length, metre, unit);
+    return nm::convert(_length, metre, unit);
 }
 double nm::Cuboid::width (const nm::MeasurementUnit unit) const
 {
-    return convert(_width, metre, unit);
+    return nm::convert(_width, metre, unit);
 }
 double nm::Cuboid::height (const nm::MeasurementUnit unit) const
 {
-    return convert(_height, metre, unit);
+    return nm::convert(_height, metre, unit);
 }
 
 double nm::Cuboid::diagonal (const nm::MeasurementUnit unit) const
 {
-    return convert(sqrt(nm::square(_length) + nm::square(_width) + nm::square(_height)), metre, unit);
+    return nm::convert(sqrt(nm::square(_length) + nm::square(_width) + nm::square(_height)), metre, unit);
 }
 
 double nm::Cuboid::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(2.0 * (_length * _width + _length * _height + _width * _height), metre, unit, 2u);
+    return nm::convert(2.0 * (_length * _width + _length * _height + _width * _height), metre, unit, 2u);
 }
 
 double nm::Cuboid::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(_length * _width * _height, metre, unit, 3u);
+    return nm::convert(_length * _width * _height, metre, unit, 3u);
 }
 
 nm::Ellipsoid nm::Cuboid::inscribedEllipsoid () const
@@ -102,7 +102,7 @@ nm::Error nm::Cuboid::setLength (const double newLength, const nm::MeasurementUn
     if (newLength < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newLength, unit, metre);
+    _length = nm::convert(newLength, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Cuboid::setWidth (const double newWidth, const nm::MeasurementUnit unit)
@@ -110,7 +110,7 @@ nm::Error nm::Cuboid::setWidth (const double newWidth, const nm::MeasurementUnit
     if (newWidth < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _width = convert(newWidth, unit, metre);
+    _width = nm::convert(newWidth, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Cuboid::setHeight (const double newHeight, const nm::MeasurementUnit unit)
@@ -118,7 +118,7 @@ nm::Error nm::Cuboid::setHeight (const double newHeight, const nm::MeasurementUn
     if (newHeight < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _height = convert(newHeight, unit, metre);
+    _height = nm::convert(newHeight, unit, metre);
     return nm::Error::NoError;
 }
 

@@ -4,30 +4,31 @@
 #include <iostream>
 
 #include <nyanmaths/core.hpp>
+#include <nyanmaths/vector.hpp>
 
 
 namespace nm
 {
-    class Vector3
+    class Vector3 : public nm::Vector
     {
         public:
             explicit Vector3();
             explicit Vector3(double x, double y, double z);
 
-            virtual ~Vector3();
+            virtual ~Vector3() override;
 
 
             double x() const;
             double y() const;
             double z() const;
-            double length() const;
+            double length() const override;
 
             void setX(double newX);
             void setY(double newY);
             void setZ(double newY);
-            nm::Error setLength(double newLength);
+            virtual nm::Error setLength(double newLength) override;
 
-            bool isNull() const;
+            virtual bool isNull() const override;
             bool isCollinear(const nm::Vector3& mayBeCollinear) const;
 
 

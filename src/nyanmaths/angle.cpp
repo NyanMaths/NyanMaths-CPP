@@ -57,7 +57,7 @@ double nm::Angle::value (const nm::Angle::Unit convertUnit, const bool mainValue
 nm::Error nm::Angle::setValue (const double newValue, const nm::Angle::Unit newUnit)
 {
     if (newValue < 0.0)
-        return InvalidValue;
+        return nm::Error::InvalidValue;
 
 
     if (newUnit == nm::Angle::Unit::Radian)

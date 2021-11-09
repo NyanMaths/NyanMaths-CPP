@@ -61,7 +61,7 @@ nm::Polygon::Polygon () :
 
 nm::Polygon::Polygon (const uint64_t numberOfSides, const double side, const nm::MeasurementUnit unit) :
     _numberOfSides(numberOfSides),
-    _side(convert(side, unit, metre))
+    _side(nm::convert(side, unit, metre))
 {
     if (numberOfSides < 3u)
         throw std::logic_error("Exception in nm::Polygon::Polygon : invalid number of sides");
@@ -107,22 +107,22 @@ uint64_t nm::Polygon::numberOfDiagonals () const
 
 double nm::Polygon::side (const nm::MeasurementUnit unit) const
 {
-    return convert(_side, metre, unit);
+    return nm::convert(_side, metre, unit);
 }
 
 double nm::Polygon::apothem (const nm::MeasurementUnit unit) const
 {
-    return convert(_side / tan(nm::consts::pi / _numberOfSides) * 0.5, metre, unit);
+    return nm::convert(_side / tan(nm::consts::pi / _numberOfSides) * 0.5, metre, unit);
 }
 
 double nm::Polygon::perimeter (const nm::MeasurementUnit unit) const
 {
-    return convert(_numberOfSides * _side, metre, unit);
+    return nm::convert(_numberOfSides * _side, metre, unit);
 }
 
 double nm::Polygon::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(apothem() * perimeter() * 0.5, metre, unit, 2u);
+    return nm::convert(apothem() * perimeter() * 0.5, metre, unit, 2u);
 }
 
 nm::Disk nm::Polygon::incircle () const
@@ -159,7 +159,7 @@ nm::Error nm::Polygon::setSide (const double newSide, const nm::MeasurementUnit 
     if (newSide < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _side = convert(newSide, unit, metre);
+    _side = nm::convert(newSide, unit, metre);
     return nm::Error::NoError;
 }
 
@@ -168,7 +168,7 @@ nm::Error nm::Polygon::setApothem (const double newApothem, const nm::Measuremen
     if (newApothem < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _side = convert(newApothem * 2.0 * tan(nm::consts::pi / _numberOfSides), unit, metre);
+    _side = nm::convert(newApothem * 2.0 * tan(nm::consts::pi / _numberOfSides), unit, metre);
     return nm::Error::NoError;
 }
 
@@ -177,7 +177,7 @@ nm::Error nm::Polygon::setPerimeter (const double newPerimeter, const nm::Measur
     if (newPerimeter < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _side = convert(newPerimeter / _numberOfSides, unit, metre);
+    _side = nm::convert(newPerimeter / _numberOfSides, unit, metre);
     return nm::Error::NoError;
 }
 
@@ -186,7 +186,7 @@ nm::Error nm::Polygon::setSurface (const double newSurface, const nm::Measuremen
     if (newSurface < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _side = convert(sqrt((tan(nm::consts::pi / _numberOfSides) * newSurface / _numberOfSides)) * 2.0, unit, metre);
+    _side = nm::convert(sqrt((tan(nm::consts::pi / _numberOfSides) * newSurface / _numberOfSides)) * 2.0, unit, metre);
     return nm::Error::NoError;
 }
 

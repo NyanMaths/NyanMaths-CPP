@@ -18,15 +18,15 @@ nm::Rectangle::Rectangle () :
 }
 
 nm::Rectangle::Rectangle (const double length, const double width, const nm::MeasurementUnit unit) :
-    _length(convert(length, unit, metre)),
-    _width(convert(width, unit, metre))
+    _length(nm::convert(length, unit, metre)),
+    _width(nm::convert(width, unit, metre))
 {
     if (length < 0.0 || width < 0.0)
         throw std::invalid_argument("Exception in nm::Rectangle::Rectangle : invalid measurements");
 }
 
 nm::Rectangle::Rectangle (const double side, const nm::MeasurementUnit unit) :
-    _length(convert(side, unit, metre)),
+    _length(nm::convert(side, unit, metre)),
     _width(_length)
 {
     if (side < 0.0)
@@ -56,26 +56,26 @@ std::string nm::Rectangle::whatIsThis () const
 
 double nm::Rectangle::length (const nm::MeasurementUnit unit) const
 {
-    return convert(_length, metre, unit);
+    return nm::convert(_length, metre, unit);
 }
 double nm::Rectangle::width (const nm::MeasurementUnit unit) const
 {
-    return convert(_width, metre, unit);
+    return nm::convert(_width, metre, unit);
 }
 
 double nm::Rectangle::diagonal (const nm::MeasurementUnit unit) const
 {
-    return convert(sqrt(nm::square(_length) + nm::square(_width)), metre, unit);
+    return nm::convert(sqrt(nm::square(_length) + nm::square(_width)), metre, unit);
 }
 
 double nm::Rectangle::perimeter (const nm::MeasurementUnit unit) const
 {
-    return convert(2.0 * (_length + _width), metre, unit);
+    return nm::convert(2.0 * (_length + _width), metre, unit);
 }
 
 double nm::Rectangle::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(_length * _width, metre, unit, 2u);
+    return nm::convert(_length * _width, metre, unit, 2u);
 }
 
 nm::Disk nm::Rectangle::circumcircle () const
@@ -89,7 +89,7 @@ nm::Error nm::Rectangle::setLength (const double newLength, const nm::Measuremen
     if (newLength < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _length = convert(newLength, unit, metre);
+    _length = nm::convert(newLength, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Rectangle::setWidth (const double newWidth, const nm::MeasurementUnit unit)
@@ -97,7 +97,7 @@ nm::Error nm::Rectangle::setWidth (const double newWidth, const nm::MeasurementU
     if (newWidth < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _width = convert(newWidth, unit, metre);
+    _width = nm::convert(newWidth, unit, metre);
     return nm::Error::NoError;
 }
 

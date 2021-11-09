@@ -16,15 +16,15 @@ nm::Ellipse::Ellipse () :
 }
 
 nm::Ellipse::Ellipse (const double a, const double b, const nm::MeasurementUnit unit) :
-    _a(convert(a, unit, metre)),
-    _b(convert(b, unit, metre))
+    _a(nm::convert(a, unit, metre)),
+    _b(nm::convert(b, unit, metre))
 {
     if (a < 0.0 || b < 0.0)
         throw std::invalid_argument("Exception in nm::Ellipse::Ellipse : invalid measurements");
 }
 
 nm::Ellipse::Ellipse (const double radius, const nm::MeasurementUnit unit) :
-    _a(convert(radius, unit, metre)),
+    _a(nm::convert(radius, unit, metre)),
     _b(_a)
 {
     if (radius < 0.0)
@@ -54,21 +54,21 @@ std::string nm::Ellipse::whatIsThis () const
 
 double nm::Ellipse::a (const nm::MeasurementUnit unit) const
 {
-    return convert(_a, metre, unit);
+    return nm::convert(_a, metre, unit);
 }
 double nm::Ellipse::b (const nm::MeasurementUnit unit) const
 {
-    return convert(_b, metre, unit);
+    return nm::convert(_b, metre, unit);
 }
 
 double nm::Ellipse::perimeter (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::consts::tau * sqrt((_a * _a + _b * _b) * 0.5), metre, unit);
+    return nm::convert(nm::consts::tau * sqrt((_a * _a + _b * _b) * 0.5), metre, unit);
 }
 
 double nm::Ellipse::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(nm::consts::pi * _a * _b, metre, unit, 2);
+    return nm::convert(nm::consts::pi * _a * _b, metre, unit, 2);
 }
 
 double nm::Ellipse::linearEccentricity () const
@@ -86,7 +86,7 @@ nm::Error nm::Ellipse::setA (const double newA, const nm::MeasurementUnit unit)
     if (newA < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _a = convert(newA, unit, metre);
+    _a = nm::convert(newA, unit, metre);
     return nm::Error::NoError;
 }
 nm::Error nm::Ellipse::setB (const double newB, const nm::MeasurementUnit unit)
@@ -94,7 +94,7 @@ nm::Error nm::Ellipse::setB (const double newB, const nm::MeasurementUnit unit)
     if (newB < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _b = convert(newB, unit, metre);
+    _b = nm::convert(newB, unit, metre);
     return nm::Error::NoError;
 }
 

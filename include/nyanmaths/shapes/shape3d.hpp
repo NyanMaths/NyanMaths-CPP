@@ -29,8 +29,16 @@ namespace nm
 
             virtual nm::Error setSurface(double, nm::MeasurementUnit unit = nm::Shape::defaultMeasurementUnit()) = 0;
             virtual nm::Error setVolume(double, nm::MeasurementUnit unit = nm::Shape::defaultMeasurementUnit()) = 0;
-    };
-}
+
+
+            static nm::MassUnit defaultMassUnit();
+            static void setDefaultMassUnit(nm::MassUnit);
+
+
+        private:
+            static nm::MassUnit _defaultMassUnit;
+    };  /// Class Shape3D
+}  /// Namespace nm
 
 
 #endif  // SHAPE3D_HPP

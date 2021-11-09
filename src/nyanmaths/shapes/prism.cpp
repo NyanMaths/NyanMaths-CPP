@@ -10,7 +10,7 @@
 
 nm::Prism::Prism (nm::Shape2D* const base, const double height, const nm::MeasurementUnit unit) :
     _base(base),
-    _height(convert(height, unit, metre))
+    _height(nm::convert(height, unit, metre))
 {
     if (height < 0.0)
         throw std::invalid_argument("Exception in nm::Prism::Prism : invalid height");
@@ -34,21 +34,21 @@ nm::Shape2D* nm::Prism::base () const
 
 double nm::Prism::height (const nm::MeasurementUnit unit) const
 {
-    return convert(_height, metre, unit);
+    return nm::convert(_height, metre, unit);
 }
 
 double nm::Prism::lateralSurface (const nm::MeasurementUnit unit) const
 {
-    return convert(_base->perimeter() * _height, metre, unit, 2u);
+    return nm::convert(_base->perimeter() * _height, metre, unit, 2u);
 }
 double nm::Prism::surface (const nm::MeasurementUnit unit) const
 {
-    return convert(_base->perimeter() * _height + _base->surface() * 2.0, metre, unit, 2u);
+    return nm::convert(_base->perimeter() * _height + _base->surface() * 2.0, metre, unit, 2u);
 }
 
 double nm::Prism::volume (const nm::MeasurementUnit unit) const
 {
-    return convert(_base->surface() * _height, metre, unit, 3u);
+    return nm::convert(_base->surface() * _height, metre, unit, 3u);
 }
 
 
@@ -57,7 +57,7 @@ nm::Error nm::Prism::setHeight (const double newHeight, const nm::MeasurementUni
     if (newHeight < 0.0)
         return nm::Error::InvalidMeasurement;
 
-    _height = convert(newHeight, unit, metre);
+    _height = nm::convert(newHeight, unit, metre);
     return nm::Error::NoError;
 }
 
